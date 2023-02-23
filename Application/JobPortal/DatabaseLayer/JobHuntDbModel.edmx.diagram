@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="48e45c06a1cf463d9d35168f04407b36" Name="Diagram1">
+        <EntityTypeShape EntityType="JobshuntDbModel.JobCategoryTable" Width="1.5" PointX="3.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobshuntDbModel.JobNatureTable" Width="1.5" PointX="3.75" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobshuntDbModel.JobStatusTable" Width="1.5" PointX="3.75" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobshuntDbModel.UserTypeTable" Width="1.5" PointX="1.5" PointY="13.875" IsExpanded="true" />
+        <AssociationConnector Association="JobshuntDbModel.FK_PostJobTable_JobRequirementsTable" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="JobshuntDbModel.CompanyTable" Width="1.5" PointX="6" PointY="21.25" />
+        <EntityTypeShape EntityType="JobshuntDbModel.UserTable" Width="1.5" PointX="3.75" PointY="21.25" />
+        <AssociationConnector Association="JobshuntDbModel.FK_CompanyTable_UserTable" />
+        <AssociationConnector Association="JobshuntDbModel.FK_UserTypeTable_UserTable" />
+        <EntityTypeShape EntityType="JobshuntDbModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="JobshuntDbModel.JobRequirementsTable" Width="1.5" PointX="8.25" PointY="12.875" />
+        <EntityTypeShape EntityType="JobshuntDbModel.PostJobTable" Width="1.5" PointX="8.25" PointY="16.125" />
+        <AssociationConnector Association="JobshuntDbModel.FK_PostJobTable_CompanyTable" />
+        <AssociationConnector Association="JobshuntDbModel.FK_PostJobTable_JobCategoryTable" />
+        <AssociationConnector Association="JobshuntDbModel.FK_PostJobTable_JobNatureTable" />
+        <AssociationConnector Association="JobshuntDbModel.FK_PostJobTable_JobStatusTable" />
+        <AssociationConnector Association="JobshuntDbModel.FK_PostJobTable_UserTable" />
+        <EntityTypeShape EntityType="JobshuntDbModel.JobRequirementDetailTable" Width="1.5" PointX="10.5" PointY="16" />
+        <AssociationConnector Association="JobshuntDbModel.FK_JobRequirementDetailTable_JobRequirementsTable" />
+        <AssociationConnector Association="JobshuntDbModel.FK_JobRequirementDetailTable_PostJobTable" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

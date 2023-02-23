@@ -1,0 +1,37 @@
+﻿@model IEnumerable<DatabaseLayer.UserTable>
+
+@{
+    ViewBag.Title = "All Users";
+}
+
+<div class="section-top-border col-md-10">
+    <h3 class="mb-30">
+        All Users
+    </h3>
+        <div class="progress-table-wrap">
+            <div class="progress-table">
+
+                <div class="table-head">
+                    <div class="serial">#</div>
+                    <div class="country">User Type</div>
+                    <div class="country">User Name</div>
+                    <div class="country">Password</div>
+                    <div class="country">Email Address</div>
+                    <div class="country">Contact No</div>
+                </div>
+
+                @foreach (var item in Model)
+                {
+                    <div class="table-row">
+                        <div class="serial">@Html.DisplayFor(modelItem => item.UserID)</div>
+                        <div class="country"> @Html.DisplayFor(modelItem => item.UserTypeTable.UserType)</div>
+                        <div class="country">@Html.DisplayFor(modelItem => item.UserName)</div>
+                        <div class="country"> @Html.DisplayFor(modelItem => item.Password)</div>
+                        <div class="country">@Html.DisplayFor(modelItem => item.EmailAddress)</div>
+                        <div class="country"> @Html.DisplayFor(modelItem => item.ContactNo)</div>
+                    </div>
+                }
+            </div>
+        </div>
+</div>
+

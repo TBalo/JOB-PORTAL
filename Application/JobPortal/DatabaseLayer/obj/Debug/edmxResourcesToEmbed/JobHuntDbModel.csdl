@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JobshuntDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="JobCategoryTable">
+    <Key>
+      <PropertyRef Name="JobCategoryID" />
+    </Key>
+    <Property Name="JobCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobCategory" Type="String" MaxLength="350" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PostJobTables" Relationship="JobshuntDbModel.FK_PostJobTable_JobCategoryTable" FromRole="JobCategoryTable" ToRole="PostJobTable" />
+  </EntityType>
+  <EntityType Name="JobNatureTable">
+    <Key>
+      <PropertyRef Name="JobNatureID" />
+    </Key>
+    <Property Name="JobNatureID" Type="Int32" Nullable="false" />
+    <Property Name="JobNature" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="PostJobTables" Relationship="JobshuntDbModel.FK_PostJobTable_JobNatureTable" FromRole="JobNatureTable" ToRole="PostJobTable" />
+  </EntityType>
+  <EntityType Name="JobStatusTable">
+    <Key>
+      <PropertyRef Name="JobStatusID" />
+    </Key>
+    <Property Name="JobStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobStatus" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StatusMessage" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PostJobTables" Relationship="JobshuntDbModel.FK_PostJobTable_JobStatusTable" FromRole="JobStatusTable" ToRole="PostJobTable" />
+  </EntityType>
+  <EntityType Name="UserTypeTable">
+    <Key>
+      <PropertyRef Name="UserTypeID" />
+    </Key>
+    <Property Name="UserTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserType" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserTables" Relationship="JobshuntDbModel.FK_UserTypeTable_UserTable" FromRole="UserTypeTable" ToRole="UserTable" />
+  </EntityType>
+  <EntityContainer Name="JobshuntDbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="JobCategoryTables" EntityType="Self.JobCategoryTable" />
+    <EntitySet Name="JobNatureTables" EntityType="Self.JobNatureTable" />
+    <EntitySet Name="JobStatusTables" EntityType="Self.JobStatusTable" />
+    <EntitySet Name="UserTypeTables" EntityType="Self.UserTypeTable" />
+    <EntitySet Name="CompanyTables" EntityType="JobshuntDbModel.CompanyTable" />
+    <EntitySet Name="UserTables" EntityType="JobshuntDbModel.UserTable" />
+    <AssociationSet Name="FK_CompanyTable_UserTable" Association="JobshuntDbModel.FK_CompanyTable_UserTable">
+      <End Role="UserTable" EntitySet="UserTables" />
+      <End Role="CompanyTable" EntitySet="CompanyTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserTypeTable_UserTable" Association="JobshuntDbModel.FK_UserTypeTable_UserTable">
+      <End Role="UserTypeTable" EntitySet="UserTypeTables" />
+      <End Role="UserTable" EntitySet="UserTables" />
+    </AssociationSet>
+    <EntitySet Name="JobRequirementsTables" EntityType="JobshuntDbModel.JobRequirementsTable" />
+    <EntitySet Name="sysdiagrams" EntityType="JobshuntDbModel.sysdiagram" />
+    <EntitySet Name="PostJobTables" EntityType="JobshuntDbModel.PostJobTable" />
+    <AssociationSet Name="FK_PostJobTable_CompanyTable" Association="JobshuntDbModel.FK_PostJobTable_CompanyTable">
+      <End Role="CompanyTable" EntitySet="CompanyTables" />
+      <End Role="PostJobTable" EntitySet="PostJobTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostJobTable_JobCategoryTable" Association="JobshuntDbModel.FK_PostJobTable_JobCategoryTable">
+      <End Role="JobCategoryTable" EntitySet="JobCategoryTables" />
+      <End Role="PostJobTable" EntitySet="PostJobTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostJobTable_JobNatureTable" Association="JobshuntDbModel.FK_PostJobTable_JobNatureTable">
+      <End Role="JobNatureTable" EntitySet="JobNatureTables" />
+      <End Role="PostJobTable" EntitySet="PostJobTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostJobTable_JobStatusTable" Association="JobshuntDbModel.FK_PostJobTable_JobStatusTable">
+      <End Role="JobStatusTable" EntitySet="JobStatusTables" />
+      <End Role="PostJobTable" EntitySet="PostJobTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostJobTable_UserTable" Association="JobshuntDbModel.FK_PostJobTable_UserTable">
+      <End Role="UserTable" EntitySet="UserTables" />
+      <End Role="PostJobTable" EntitySet="PostJobTables" />
+    </AssociationSet>
+    <EntitySet Name="JobRequirementDetailTables" EntityType="JobshuntDbModel.JobRequirementDetailTable" />
+    <AssociationSet Name="FK_JobRequirementDetailTable_JobRequirementsTable" Association="JobshuntDbModel.FK_JobRequirementDetailTable_JobRequirementsTable">
+      <End Role="JobRequirementsTable" EntitySet="JobRequirementsTables" />
+      <End Role="JobRequirementDetailTable" EntitySet="JobRequirementDetailTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobRequirementDetailTable_PostJobTable" Association="JobshuntDbModel.FK_JobRequirementDetailTable_PostJobTable">
+      <End Role="PostJobTable" EntitySet="PostJobTables" />
+      <End Role="JobRequirementDetailTable" EntitySet="JobRequirementDetailTables" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CompanyTable">
+    <Key>
+      <PropertyRef Name="CompanyID" />
+    </Key>
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Logo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserTable" Relationship="JobshuntDbModel.FK_CompanyTable_UserTable" FromRole="CompanyTable" ToRole="UserTable" />
+    <NavigationProperty Name="PostJobTables" Relationship="JobshuntDbModel.FK_PostJobTable_CompanyTable" FromRole="CompanyTable" ToRole="PostJobTable" />
+  </EntityType>
+  <EntityType Name="UserTable">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="UserTypeID" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CompanyTables" Relationship="JobshuntDbModel.FK_CompanyTable_UserTable" FromRole="UserTable" ToRole="CompanyTable" />
+    <NavigationProperty Name="UserTypeTable" Relationship="JobshuntDbModel.FK_UserTypeTable_UserTable" FromRole="UserTable" ToRole="UserTypeTable" />
+    <NavigationProperty Name="PostJobTables" Relationship="JobshuntDbModel.FK_PostJobTable_UserTable" FromRole="UserTable" ToRole="PostJobTable" />
+  </EntityType>
+  <Association Name="FK_CompanyTable_UserTable">
+    <End Type="JobshuntDbModel.UserTable" Role="UserTable" Multiplicity="1" />
+    <End Type="JobshuntDbModel.CompanyTable" Role="CompanyTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserTable">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="CompanyTable">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserTypeTable_UserTable">
+    <End Type="JobshuntDbModel.UserTypeTable" Role="UserTypeTable" Multiplicity="1" />
+    <End Type="JobshuntDbModel.UserTable" Role="UserTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserTypeTable">
+        <PropertyRef Name="UserTypeID" />
+      </Principal>
+      <Dependent Role="UserTable">
+        <PropertyRef Name="UserTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="JobRequirementsTable">
+    <Key>
+      <PropertyRef Name="JobRequirementID" />
+    </Key>
+    <Property Name="JobRequirementID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobRequirementTitle" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="JobRequirementDetailTables" Relationship="JobshuntDbModel.FK_JobRequirementDetailTable_JobRequirementsTable" FromRole="JobRequirementsTable" ToRole="JobRequirementDetailTable" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="PostJobTable">
+    <Key>
+      <PropertyRef Name="PostJobID" />
+    </Key>
+    <Property Name="PostJobID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <Property Name="JobCategoryID" Type="Int32" Nullable="false" />
+    <Property Name="JobTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="JobDescription" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="MinSalary" Type="Int32" Nullable="false" />
+    <Property Name="MaxSalary" Type="Int32" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Vacancy" Type="Int32" Nullable="false" />
+    <Property Name="JobNatureID" Type="Int32" />
+    <Property Name="PostDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ApplicationLastDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="LastDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="JobStatusID" Type="Int32" Nullable="false" />
+    <Property Name="WebUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CompanyTable" Relationship="JobshuntDbModel.FK_PostJobTable_CompanyTable" FromRole="PostJobTable" ToRole="CompanyTable" />
+    <NavigationProperty Name="JobCategoryTable" Relationship="JobshuntDbModel.FK_PostJobTable_JobCategoryTable" FromRole="PostJobTable" ToRole="JobCategoryTable" />
+    <NavigationProperty Name="JobNatureTable" Relationship="JobshuntDbModel.FK_PostJobTable_JobNatureTable" FromRole="PostJobTable" ToRole="JobNatureTable" />
+    <NavigationProperty Name="JobStatusTable" Relationship="JobshuntDbModel.FK_PostJobTable_JobStatusTable" FromRole="PostJobTable" ToRole="JobStatusTable" />
+    <NavigationProperty Name="UserTable" Relationship="JobshuntDbModel.FK_PostJobTable_UserTable" FromRole="PostJobTable" ToRole="UserTable" />
+    <NavigationProperty Name="JobRequirementDetailTables" Relationship="JobshuntDbModel.FK_JobRequirementDetailTable_PostJobTable" FromRole="PostJobTable" ToRole="JobRequirementDetailTable" />
+  </EntityType>
+  <Association Name="FK_PostJobTable_CompanyTable">
+    <End Type="JobshuntDbModel.CompanyTable" Role="CompanyTable" Multiplicity="1" />
+    <End Type="JobshuntDbModel.PostJobTable" Role="PostJobTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyTable">
+        <PropertyRef Name="CompanyID" />
+      </Principal>
+      <Dependent Role="PostJobTable">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostJobTable_JobCategoryTable">
+    <End Type="JobshuntDbModel.JobCategoryTable" Role="JobCategoryTable" Multiplicity="1" />
+    <End Type="JobshuntDbModel.PostJobTable" Role="PostJobTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobCategoryTable">
+        <PropertyRef Name="JobCategoryID" />
+      </Principal>
+      <Dependent Role="PostJobTable">
+        <PropertyRef Name="JobCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostJobTable_JobNatureTable">
+    <End Type="JobshuntDbModel.JobNatureTable" Role="JobNatureTable" Multiplicity="0..1" />
+    <End Type="JobshuntDbModel.PostJobTable" Role="PostJobTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobNatureTable">
+        <PropertyRef Name="JobNatureID" />
+      </Principal>
+      <Dependent Role="PostJobTable">
+        <PropertyRef Name="JobNatureID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostJobTable_JobStatusTable">
+    <End Type="JobshuntDbModel.JobStatusTable" Role="JobStatusTable" Multiplicity="1" />
+    <End Type="JobshuntDbModel.PostJobTable" Role="PostJobTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobStatusTable">
+        <PropertyRef Name="JobStatusID" />
+      </Principal>
+      <Dependent Role="PostJobTable">
+        <PropertyRef Name="JobStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostJobTable_UserTable">
+    <End Type="JobshuntDbModel.UserTable" Role="UserTable" Multiplicity="1" />
+    <End Type="JobshuntDbModel.PostJobTable" Role="PostJobTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserTable">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="PostJobTable">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="JobRequirementDetailTable">
+    <Key>
+      <PropertyRef Name="JobRequirementDetailID" />
+    </Key>
+    <Property Name="JobRequirementDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobRequirementID" Type="Int32" />
+    <Property Name="JobRequirementDetails" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="PostJobID" Type="Int32" />
+    <NavigationProperty Name="JobRequirementsTable" Relationship="JobshuntDbModel.FK_JobRequirementDetailTable_JobRequirementsTable" FromRole="JobRequirementDetailTable" ToRole="JobRequirementsTable" />
+    <NavigationProperty Name="PostJobTable" Relationship="JobshuntDbModel.FK_JobRequirementDetailTable_PostJobTable" FromRole="JobRequirementDetailTable" ToRole="PostJobTable" />
+  </EntityType>
+  <Association Name="FK_JobRequirementDetailTable_JobRequirementsTable">
+    <End Type="JobshuntDbModel.JobRequirementsTable" Role="JobRequirementsTable" Multiplicity="0..1" />
+    <End Type="JobshuntDbModel.JobRequirementDetailTable" Role="JobRequirementDetailTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobRequirementsTable">
+        <PropertyRef Name="JobRequirementID" />
+      </Principal>
+      <Dependent Role="JobRequirementDetailTable">
+        <PropertyRef Name="JobRequirementID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobRequirementDetailTable_PostJobTable">
+    <End Type="JobshuntDbModel.PostJobTable" Role="PostJobTable" Multiplicity="0..1" />
+    <End Type="JobshuntDbModel.JobRequirementDetailTable" Role="JobRequirementDetailTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PostJobTable">
+        <PropertyRef Name="PostJobID" />
+      </Principal>
+      <Dependent Role="JobRequirementDetailTable">
+        <PropertyRef Name="PostJobID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,99 @@
+﻿@model JobPortal.Models.UserLoginMV
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+<section class="contact-section">
+    <div class="container">
+        <div class="row">
+            <div class="job-category-listing mb-50">
+                <div class="col-md-12">
+                    <h2 class="contact-title" align="center">Login</h2>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </div>
+
+                @using (Html.BeginForm("Login", "User", FormMethod.Post,
+                    new
+                    {
+                        @class = "form-contact",
+                        @novalidate = "novalidate"
+                    }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.UserName, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control single-input",
+                                   @type = "text",
+                                   @name = "name",
+                                   @id = "name",
+                                   @placeholder = "Enter User Name",
+                                   @onfocus = "this.placeholder = ''",
+                                   @onblur = "this.placeholder = 'Enter User Name'",
+                                   @required = "true"
+                               }
+                           })
+                                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                            </div>
+                            @Html.EditorFor(model => model.Password, new
+                                  {
+                                      htmlAttributes = new
+                                      {
+                                          @class = "form-control single-input",
+                                          @type = "password",
+                                          @name = "password",
+                                          @id = "password",
+                                          @placeholder = "Enter Password",
+                                          @onfocus = "this.placeholder = ''",
+                                          @onblur = "this.placeholder = 'Enter Password'",
+                                          @required = "true"
+                                      }
+                                  })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="submit" value="Login" class="button boxed-btn"/>
+                        <a href="@Url.Content("~/User/ForgotPassword")" style="float:right; padding:15px 0px 0px 0px;" class="btn-link">Forgot Password?</a>
+                    </div>
+                }
+            </div>
+                <div class="col-md-6" style="padding:60px 0px 0px 60px;">
+                        <div class="media contact-info">
+                            <span class="contact-info__icon"><i class="ti-home"></i></span>
+                            <div class="media-body">
+                                <h3>Lagos, Nigeria.</h3>
+                                <p>Ogudu, 31</p>
+                            </div>
+                        </div>
+                        <div class="media contact-info">
+                            <span class="contact-info__icon"><i class="ti-tablet"></i></span>
+                            <div class="media-body">
+                                <h3>+2348163318027</h3>
+                                <p>Mon to Fri 9am to 5pm</p>
+                            </div>
+                        </div>
+                        <div class="media contact-info">
+                            <span class="contact-info__icon"><i class="ti-email"></i></span>
+                            <div class="media-body">
+                                <h3>tbalog426@gmail.com</h3>
+                                <p>For support, send us your query anytime!</p>
+                            </div>
+                        </div>
+                </div>
+            </div> 
+    </div> 
+</section>
